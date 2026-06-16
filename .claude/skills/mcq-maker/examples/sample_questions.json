@@ -1,0 +1,205 @@
+{
+  "title": "Algorithms & Data Structures — Sample Quiz",
+  "source": "sample_questions.json (built-in demo set)",
+  "config": { "levelPoints": { "1": 1, "2": 2, "3": 3 } },
+  "topics": [
+    {
+      "name": "Big-O & Complexity",
+      "questions": [
+        {
+          "id": "t1-q1",
+          "category": "theory",
+          "question": "What does it mean to say an algorithm runs in O(n) time?",
+          "options": [
+            "Its running time grows at most proportionally to the input size",
+            "It always performs exactly n operations regardless of input",
+            "It runs faster than any O(log n) algorithm",
+            "Its memory use is proportional to the input size"
+          ],
+          "answer": 0,
+          "explanation": "Big-O is an upper bound on growth rate; O(n) means time grows at most linearly. It is about time here (not memory), is not an exact count, and says nothing about beating O(log n)."
+        },
+        {
+          "id": "t1-q2",
+          "category": "theory",
+          "question": "Which statement best characterises the difference between O(n log n) and O(n^2) for large inputs?",
+          "options": [
+            "O(n log n) grows much more slowly than O(n^2) as n increases",
+            "They grow at the same rate once n is large enough",
+            "O(n^2) is always preferred because it is simpler to implement",
+            "O(n log n) uses more memory, so it is effectively slower"
+          ],
+          "answer": 0,
+          "explanation": "For large n, n log n is far below n^2. The others confuse growth rate with implementation simplicity or memory."
+        },
+        {
+          "id": "t1-q3",
+          "category": "problem_solving",
+          "question": "A loop runs from i = 1 to n, and for each i an inner loop runs from j = 1 to i. What is the tightest Big-O of the total number of inner iterations?",
+          "options": [
+            "O(n^2)",
+            "O(n)",
+            "O(n log n)",
+            "O(log n)"
+          ],
+          "answer": 0,
+          "explanation": "Total iterations = 1+2+...+n = n(n+1)/2, which is O(n^2). It is not linear; the triangular sum dominates."
+        },
+        {
+          "id": "t1-q4",
+          "category": "problem_solving",
+          "question": "Doubling the input size makes a function take four times as long. Which complexity class best fits this behaviour?",
+          "options": [
+            "O(n^2)",
+            "O(n)",
+            "O(2^n)",
+            "O(n log n)"
+          ],
+          "answer": 0,
+          "explanation": "If t(2n) = 4 t(n), the cost scales with the square of the input, i.e. O(n^2). Linear would double; exponential would square the runtime itself."
+        },
+        {
+          "id": "t1-q5",
+          "category": "conceptual",
+          "level": 1,
+          "question": "Two algorithms solve the same problem: one is O(n) and one is O(n^2). For a very small, fixed input, which is guaranteed to be faster?",
+          "options": [
+            "Neither — Big-O does not guarantee the winner on small inputs",
+            "The O(n) algorithm, because lower Big-O always means faster",
+            "The O(n^2) algorithm, because it does more work per step",
+            "Both are identical in speed for any input size"
+          ],
+          "answer": 0,
+          "explanation": "Big-O describes asymptotic growth and hides constants; for small n a higher-order algorithm can win. The 'lower Big-O always wins' claim ignores constants and small-n behaviour."
+        },
+        {
+          "id": "t1-q6",
+          "category": "conceptual",
+          "level": 2,
+          "question": "A student claims their algorithm is O(n) but it contains a nested loop where the inner loop runs a fixed 100 times. Why is the O(n) claim actually correct?",
+          "options": [
+            "The inner loop is a constant factor, so total work is 100n = O(n)",
+            "The claim is wrong; any nested loop makes it O(n^2)",
+            "It is O(n) only if 100 is larger than n",
+            "Nested loops are ignored when computing Big-O"
+          ],
+          "answer": 0,
+          "explanation": "A loop bounded by a constant contributes a constant factor, which Big-O drops, leaving O(n). Nesting matters only when the inner bound grows with n."
+        },
+        {
+          "id": "t1-q7",
+          "category": "conceptual",
+          "level": 3,
+          "question": "You must pick a sort for an array that is almost always nearly sorted, with occasional large random shuffles, on memory-constrained hardware. Which choice is the most defensible and why?",
+          "options": [
+            "Insertion sort, because it is near-linear on nearly-sorted data and uses O(1) extra space",
+            "Merge sort, because its worst case is O(n log n) regardless of input",
+            "Quicksort with a fixed first-element pivot, because it is fast on average",
+            "Bubble sort, because it is the simplest to reason about"
+          ],
+          "answer": 0,
+          "explanation": "Nearly-sorted + tight memory favours insertion sort (adaptive, in-place). Merge sort needs O(n) extra space; fixed-pivot quicksort degrades on structured data; bubble sort is uniformly poor."
+        }
+      ]
+    },
+    {
+      "name": "Hash Tables",
+      "questions": [
+        {
+          "id": "t2-q1",
+          "category": "theory",
+          "question": "What is the primary purpose of a hash function in a hash table?",
+          "options": [
+            "To map a key to a bucket index in the underlying array",
+            "To sort the keys so lookups can use binary search",
+            "To compress the stored values to save memory",
+            "To encrypt the keys so they cannot be read"
+          ],
+          "answer": 0,
+          "explanation": "A hash function turns a key into an index. It does not sort, compress, or (in general) encrypt — those are different concerns."
+        },
+        {
+          "id": "t2-q2",
+          "category": "theory",
+          "question": "In hashing, what is a 'collision'?",
+          "options": [
+            "Two distinct keys hash to the same bucket index",
+            "A key is inserted twice with different values",
+            "The table runs out of memory during insertion",
+            "A lookup is performed on a key that was never inserted"
+          ],
+          "answer": 0,
+          "explanation": "A collision is two different keys mapping to the same slot. The other options describe duplicate inserts, allocation failure, and a missing-key lookup."
+        },
+        {
+          "id": "t2-q3",
+          "category": "problem_solving",
+          "question": "A hash table uses h(k) = k mod 8. Where does key 27 land?",
+          "options": [
+            "Bucket 3",
+            "Bucket 7",
+            "Bucket 8",
+            "Bucket 2"
+          ],
+          "answer": 0,
+          "explanation": "27 mod 8 = 3. A table of size 8 has buckets 0..7, so bucket 8 cannot exist."
+        },
+        {
+          "id": "t2-q4",
+          "category": "problem_solving",
+          "question": "With separate chaining and a good hash function, the average-case time for a successful lookup is closest to which of the following?",
+          "options": [
+            "O(1)",
+            "O(n)",
+            "O(log n)",
+            "O(n log n)"
+          ],
+          "answer": 0,
+          "explanation": "With a low, bounded load factor and uniform hashing, expected chain length is constant, so lookup is O(1) on average. O(n) is the degenerate worst case."
+        },
+        {
+          "id": "t2-q5",
+          "category": "conceptual",
+          "level": 1,
+          "question": "Why does a hash table typically resize (grow its array) once the load factor gets high?",
+          "options": [
+            "To keep average chain length low so operations stay near O(1)",
+            "To put the keys back into sorted order",
+            "To reduce the total memory used by the table",
+            "To change the hash function to a more secure one"
+          ],
+          "answer": 0,
+          "explanation": "Growing the array lowers the load factor, keeping chains short and operations near constant time. Resizing uses more memory, not less, and does not sort or re-secure keys."
+        },
+        {
+          "id": "t2-q6",
+          "category": "conceptual",
+          "level": 2,
+          "question": "Two hash table designs handle collisions differently: A uses separate chaining, B uses open addressing with linear probing. Under a high load factor, why does B tend to degrade more sharply?",
+          "options": [
+            "Linear probing causes primary clustering, so probe sequences lengthen quickly",
+            "Chaining cannot store more items than the array size",
+            "Open addressing recomputes the hash on every probe, which is slow",
+            "Chaining keeps all items in one bucket, so it is always faster"
+          ],
+          "answer": 0,
+          "explanation": "Linear probing suffers primary clustering: filled runs grow and lengthen future probes, degrading fast as the table fills. Chaining is not capped by array size, and the other claims are false."
+        },
+        {
+          "id": "t2-q7",
+          "category": "conceptual",
+          "level": 3,
+          "question": "You are designing a hash table for an adversarial web service where attackers can choose the keys they submit. Which design decision most directly defends worst-case performance, and why?",
+          "options": [
+            "Use a randomised/keyed hash (e.g., SipHash) so attackers cannot force collisions",
+            "Increase the initial array size once at startup and never resize again",
+            "Switch from chaining to linear probing to save memory",
+            "Pick a simple modulo hash because it is fastest to compute"
+          ],
+          "answer": 0,
+          "explanation": "Attacker-chosen keys can force collisions and O(n) chains; a keyed/randomised hash makes the bucket mapping unpredictable. A fixed size, probing, or a trivial modulo hash all leave the collision attack open."
+        }
+      ]
+    }
+  ]
+}
