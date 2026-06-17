@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mcq-maker — non-gameable MCQ quizzes from any document</title>
+<meta name="description" content="A reusable Claude Skill that turns any document into a high-quality MCQ quiz: an interactive website plus a Word export. This is a live demo.">
+<style>
+  :root{
+    --bg:#0b1120; --panel:#111a32; --panel2:#0f172a; --line:#334155;
+    --ink:#f8fafc; --muted:#cbd5e1; --dim:#94a3b8;
+    --accent:#818cf8; --accent2:#c084fc; --chip:#312e81;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:
+      radial-gradient(1200px 600px at 80% -10%, #1b1140 0%, transparent 60%),
+      var(--bg);
+    color:var(--ink);font:16px/1.6 "Segoe UI",system-ui,-apple-system,sans-serif;}
+  .wrap{max-width:1040px;margin:0 auto;padding:32px 20px 72px}
+  .banner{width:100%;height:auto;border-radius:20px;display:block;
+    box-shadow:0 20px 60px rgba(0,0,0,.45)}
+  .cta{display:flex;gap:14px;flex-wrap:wrap;margin:28px 0 8px;align-items:center}
+  a.btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;
+    font-weight:700;border-radius:12px;padding:14px 22px;transition:.15s transform,.15s box-shadow}
+  a.btn:hover{transform:translateY(-2px)}
+  .btn.primary{color:#0b1120;background:linear-gradient(90deg,var(--accent),var(--accent2));
+    box-shadow:0 10px 30px rgba(129,140,248,.35)}
+  .btn.ghost{color:var(--ink);border:1px solid var(--line);background:rgba(255,255,255,.02)}
+  .lead{color:var(--muted);font-size:18px;max-width:70ch}
+  h2{font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);
+    margin:48px 0 14px;font-weight:700}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+  .card{background:linear-gradient(180deg,var(--panel),var(--panel2));
+    border:1px solid var(--line);border-radius:16px;padding:20px}
+  .card h3{margin:0 0 6px;font-size:17px}
+  .card p{margin:0;color:var(--muted);font-size:15px}
+  .tag{display:inline-block;font-size:13px;font-weight:600;color:#c7d2fe;
+    background:rgba(49,46,129,.55);border:1px solid rgba(99,102,241,.5);
+    border-radius:999px;padding:5px 12px;margin:0 8px 8px 0}
+  code{background:#0b1120;border:1px solid var(--line);border-radius:6px;
+    padding:2px 7px;font:14px/1.5 "JetBrains Mono",Consolas,monospace;color:#e9d5ff}
+  pre{background:#0b1120;border:1px solid var(--line);border-radius:12px;
+    padding:16px;overflow:auto;font:13.5px/1.6 "JetBrains Mono",Consolas,monospace;color:#cbd5e1}
+  footer{margin-top:56px;color:var(--dim);font-size:14px;border-top:1px solid var(--line);padding-top:20px}
+  a{color:var(--accent)}
+  .note{color:var(--dim);font-size:14px;margin-top:6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <img class="banner" src="./banner.svg" alt="mcq-maker — turn any document into a non-gameable MCQ quiz">
+
+  <div class="cta">
+    <a class="btn primary" href="./quiz.html">▶ Launch the demo quiz</a>
+    <a class="btn ghost" href="https://github.com/hammadshakeelai/mcq-maker">View on GitHub</a>
+  </div>
+  <p class="lead">
+    <strong>mcq-maker</strong> is a reusable Claude Skill. Point it at any document —
+    PDF, slides, lecture notes, a textbook chapter — and it writes a rigorous
+    multiple-choice quiz, then ships it two ways: an interactive quiz website and a
+    Word (.docx) export. The questions test understanding, and the engine makes them
+    impossible to game by answer-position patterns or elimination tricks.
+  </p>
+  <p class="note">The demo below was generated from a sample “Algorithms &amp; Data Structures” set — try Practice mode for instant feedback.</p>
+
+  <h2>Three kinds of question</h2>
+  <div class="grid">
+    <div class="card"><h3>Theory</h3><p>Definitions and principles, phrased for comprehension — not recognition.</p></div>
+    <div class="card"><h3>Problem Solving</h3><p>Apply a formula, calculate, trace logic, debug, solve a scenario.</p></div>
+    <div class="card"><h3>Conceptual</h3><p>Why / what-if / compare / find-the-flaw — split into 3 Bloom levels, each scored on its own.</p></div>
+  </div>
+
+  <h2>What the quiz does</h2>
+  <div>
+    <span class="tag">Practice &amp; Exam modes</span>
+    <span class="tag">Sidebar jump by topic / category / level</span>
+    <span class="tag">Score by category &amp; by level (independent points)</span>
+    <span class="tag">Progress + flag/bookmark</span>
+    <span class="tag">Optional timer</span>
+    <span class="tag">Reshuffle / retry</span>
+    <span class="tag">Keyboard shortcuts (1–4, ←/→, F, S)</span>
+    <span class="tag">Saves to localStorage</span>
+    <span class="tag">Answer-key toggle (hidden by default)</span>
+    <span class="tag">One-click Word export (offline, no deps)</span>
+  </div>
+
+  <h2>Balanced, non-gameable answers</h2>
+  <p class="lead">Correct positions are randomized and balanced across A/B/C/D with no streak longer than two.
+  The correct option is never longer, marked, or hinted inline, and distractors are built from real misconceptions.</p>
+
+  <h2>Use the skill yourself</h2>
+  <pre>python .claude/skills/mcq-maker/scripts/validate_mcqs.py path/to/questions.json
+python .claude/skills/mcq-maker/scripts/build_quiz.py    path/to/questions.json quiz.html
+python .claude/skills/mcq-maker/scripts/make_docx.py     path/to/questions.json quiz.docx</pre>
+  <p class="note">Inside Claude Code, just ask: “make a quiz from <code>&lt;file&gt;</code>” and the <code>/mcq-maker</code> skill runs the whole pipeline.</p>
+
+  <footer>
+    Built as a Claude Skill · <a href="https://github.com/hammadshakeelai/mcq-maker">github.com/hammadshakeelai/mcq-maker</a>
+  </footer>
+</div>
+</body>
+</html>

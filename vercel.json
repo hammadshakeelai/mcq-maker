@@ -1,0 +1,8 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "python3 scripts/build_site.py || true",
+  "outputDirectory": "web",
+  "framework": null,
+  "cleanUrls": true,
+  "trailingSlash": false
+}
