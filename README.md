@@ -1,9 +1,24 @@
-# mcq-maker
+<p align="center">
+  <img src="assets/banner.svg" alt="mcq-maker — turn any document into a non-gameable MCQ quiz" width="880">
+</p>
+
+<h1 align="center">mcq-maker</h1>
+
+<p align="center">
+  <a href="https://mcq-maker-one.vercel.app"><b>▶ Live demo</b></a>
+  &nbsp;·&nbsp;
+  <a href=".claude/skills/mcq-maker/SKILL.md">Skill pipeline</a>
+  &nbsp;·&nbsp;
+  <a href="DEPLOY.md">Deploy your own</a>
+</p>
 
 A reusable **Claude Skill** that turns any document (PDF, DOCX, slides, lecture
 notes, textbook chapter, article) into a high-quality multiple-choice quiz —
 delivered as both an **interactive single-file quiz website** and a **Word
 (.docx) export**.
+
+> **Try it now:** [mcq-maker-one.vercel.app](https://mcq-maker-one.vercel.app) —
+> a live demo built from a sample question set. Open it and hit *Practice mode*.
 
 The questions are designed to test *real understanding*, not cramming, and the
 quiz engine makes them impossible to game by answer-position patterns or

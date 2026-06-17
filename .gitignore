@@ -15,3 +15,5 @@ Thumbs.db
 # Scratch / build artifacts (the demo outputs in examples/ are kept on purpose)
 /tmp/
 *.tmp
+
+.vercel
