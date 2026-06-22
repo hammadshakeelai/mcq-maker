@@ -70,3 +70,5 @@ To use it from any project, copy `.claude/skills/mcq-maker/` to
 
 See the skill's `SKILL.md` for the full pipeline, the data schema, how to
 preview/screenshot the quiz, and the development gotchas.
+
+###  GOODLUCK :)
